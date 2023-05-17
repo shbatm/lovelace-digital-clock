@@ -1,10 +1,21 @@
+import { HomeAssistant } from 'custom-card-helpers';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {css, CSSResult, html, LitElement, PropertyValues, TemplateResult} from 'lit';
-import {customElement, property, state} from 'lit/decorators';
-import {DateTime} from 'luxon';
-import {HomeAssistant} from 'custom-card-helpers';
+import {
+  css,
+  CSSResult,
+  html,
+  LitElement,
+  PropertyValues,
+  TemplateResult,
+} from 'lit';
+import {
+  customElement,
+  property,
+  state,
+} from 'lit/decorators';
+import { DateTime } from 'luxon';
 
-import {CARD_VERSION} from './const';
+import { CARD_VERSION } from './const';
 import IDigitalClockConfig from './IDigitalClockConfig';
 
 /* eslint no-console: 0 */
@@ -26,6 +37,8 @@ console.info(
 export class DigitalClock extends LitElement {
     @property({attribute: false}) public hass!: HomeAssistant;
     @state() private _firstLine = '';
+    @state() private _meridiem = '';
+    @state() private _seconds = '';
     @state() private _secondLine = '';
     @state() private _config?: IDigitalClockConfig;
     @state() private _interval = 1000;
@@ -42,7 +55,7 @@ export class DigitalClock extends LitElement {
     }
 
     protected shouldUpdate(changedProps: PropertyValues): boolean {
-        return changedProps.has('_firstLine') || changedProps.has('_secondLine') || changedProps.has('_config') || changedProps.has('hass');
+        return changedProps.has('_firstLine') || changedProps.has('_seconds') || changedProps.has('_meridiem') || changedProps.has('_secondLine') || changedProps.has('_config') || changedProps.has('hass');
     }
 
     public async getCardSize(): Promise<number> {
@@ -102,6 +115,8 @@ export class DigitalClock extends LitElement {
 
         let firstLine: string;
         let secondLine: string;
+        const meridiem: string = dateTime.toFormat("a").toLowerCase();
+        const seconds: string = dateTime.toFormat("ss");
 
         if (typeof this._config?.firstLineFormat === 'string')
             firstLine = dateTime.toFormat(this._config.firstLineFormat);
@@ -115,6 +130,10 @@ export class DigitalClock extends LitElement {
 
         if (firstLine !== this._firstLine)
             this._firstLine = firstLine;
+        if (meridiem !== this._meridiem)
+            this._meridiem = meridiem;
+        if (seconds !== this._seconds)
+            this._seconds = seconds;
         if (secondLine !== this._secondLine)
             this._secondLine = secondLine;
     }
@@ -127,7 +146,7 @@ export class DigitalClock extends LitElement {
     protected render(): TemplateResult | void {
         return html`
             <ha-card>
-                <span class="first-line">${this._firstLine}</span>
+                <span class="first-line">${this._firstLine}<sup>${this._seconds}</sup> <span>${this._meridiem}</span></span>
                 <span class="second-line">${this._secondLine}</span>
             </ha-card>
         `;
@@ -137,22 +156,32 @@ export class DigitalClock extends LitElement {
         return css`
           ha-card {
             text-align: center;
-            font-weight: bold;
+            font-weight: 300;
             padding: 8px 0;
+            font-size: 2em;
+            line-height: 1.5em;
+          }
+
+          sup {
+            font-size: 50%;
+            line-height: 50%;
+            color: var(--disabled-text-color);
           }
 
           ha-card > span {
             display: block;
+            text-align: left;
           }
 
           .first-line {
-            font-size: 2.8em;
+            font-size: 2.6em;
             line-height: 1em;
           }
 
           .second-line {
-            font-size: 1.6em;
+            font-size: 1em;
             line-height: 1em;
+            color: var(--disabled-text-color);
           }
         `;
     }
