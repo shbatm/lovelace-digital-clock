@@ -156,7 +156,7 @@ export class DigitalClockMM2Large extends LitElement {
         return css`
           ha-card {
             text-align: center;
-            font-weight: 300;
+            font-weight: 400;
             padding: 8px 0;
             font-size: 2em;
             line-height: 1.5em;
