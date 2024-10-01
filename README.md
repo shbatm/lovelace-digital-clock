@@ -28,7 +28,7 @@ If `timeFormat` is specified, it will override `firstLineFormat` and `dateFormat
 
 # Example
 ```
-type: 'custom:digital-clock'
+type: 'custom:digital-clock-mm2large'
 dateFormat:
   weekday: 'long'
   day: '2-digit'
@@ -38,6 +38,6 @@ timeFormat:
   minute: '2-digit'
 ```
 
-[license-shield]: https://img.shields.io/github/license/wassy92x/lovelace-digital-clock.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/wassy92x/lovelace-digital-clock.svg?style=for-the-badge
-[releases]: https://github.com/wassy92x/lovelace-digital-clock/releases
+[license-shield]: https://img.shields.io/github/license/shbatm/lovelace-digital-clock.svg?style=for-the-badge
+[releases-shield]: https://img.shields.io/github/release/shbatm/lovelace-digital-clock.svg?style=for-the-badge
+[releases]: https://github.com/shbatm/lovelace-digital-clock/releases

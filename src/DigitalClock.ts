@@ -1,17 +1,17 @@
 import { HomeAssistant } from 'custom-card-helpers';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  css,
-  CSSResult,
-  html,
-  LitElement,
-  PropertyValues,
-  TemplateResult,
+    css,
+    CSSResult,
+    html,
+    LitElement,
+    PropertyValues,
+    TemplateResult,
 } from 'lit';
 import {
-  customElement,
-  property,
-  state,
+    customElement,
+    property,
+    state,
 } from 'lit/decorators';
 import { DateTime } from 'luxon';
 
@@ -28,14 +28,14 @@ console.info(
 // This puts your card into the UI card picker dialog
 (window as any).customCards = (window as any).customCards || [];
 (window as any).customCards.push({
-    type: 'digital-clock',
-    name: 'DigitalClock',
+    type: 'digital-clock-mm2large',
+    name: 'DigitalClockMM2Large',
     description: 'A digital clock component',
 });
 
-@customElement('digital-clock')
-export class DigitalClock extends LitElement {
-    @property({attribute: false}) public hass!: HomeAssistant;
+@customElement('digital-clock-mm2large')
+export class DigitalClockMM2Large extends LitElement {
+    @property({ attribute: false }) public hass!: HomeAssistant;
     @state() private _firstLine = '';
     @state() private _meridiem = '';
     @state() private _seconds = '';
@@ -45,7 +45,7 @@ export class DigitalClock extends LitElement {
     private _intervalId?: number;
 
     public setConfig(config: IDigitalClockConfig): void {
-        this._config = {...config};
+        this._config = { ...config };
         if (this._config.timeFormat)
             this._config.firstLineFormat = this._config.timeFormat;
         if (this._config.dateFormat)
@@ -121,12 +121,12 @@ export class DigitalClock extends LitElement {
         if (typeof this._config?.firstLineFormat === 'string')
             firstLine = dateTime.toFormat(this._config.firstLineFormat);
         else
-            firstLine = dateTime.toLocaleString(this._config?.firstLineFormat ?? {hour: '2-digit', minute: '2-digit'});
+            firstLine = dateTime.toLocaleString(this._config?.firstLineFormat ?? { hour: '2-digit', minute: '2-digit' });
 
         if (typeof this._config?.secondLineFormat === 'string')
             secondLine = dateTime.toFormat(this._config.secondLineFormat);
         else
-            secondLine = dateTime.toLocaleString(this._config?.secondLineFormat ?? {weekday: 'short', day: '2-digit', month: 'short'});
+            secondLine = dateTime.toLocaleString(this._config?.secondLineFormat ?? { weekday: 'short', day: '2-digit', month: 'short' });
 
         if (firstLine !== this._firstLine)
             this._firstLine = firstLine;
@@ -146,7 +146,7 @@ export class DigitalClock extends LitElement {
     protected render(): TemplateResult | void {
         return html`
             <ha-card>
-                <span class="first-line">${this._firstLine}<sup>${this._seconds}</sup> <span>${this._meridiem}</span></span>
+                <span class="first-line">${this._firstLine}<sup>${this._seconds}</sup> <span class="meridiem">${this._meridiem}</span></span>
                 <span class="second-line">${this._secondLine}</span>
             </ha-card>
         `;
@@ -170,18 +170,32 @@ export class DigitalClock extends LitElement {
 
           ha-card > span {
             display: block;
-            text-align: left;
+            text-align: center;
           }
 
           .first-line {
-            font-size: 2.6em;
-            line-height: 1em;
+            font-size: 5.5em;
+            line-height: .7em;
+            position: relative;
+            top: 0em;
+            text-align: center;
+            left: 50%;
+            transform: translateX(calc(-50% + .3em));
+            display: table;
+            margin: 0 auto;
           }
 
           .second-line {
             font-size: 1em;
             line-height: 1em;
             color: var(--disabled-text-color);
+          }
+
+          .meridiem {
+            font-size: 50% !important;
+            position: relative;
+            top: 0em;
+            left: -1.1em;
           }
         `;
     }

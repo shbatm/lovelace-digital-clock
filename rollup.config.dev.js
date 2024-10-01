@@ -9,7 +9,7 @@ import json from '@rollup/plugin-json';
 export default {
   input: ['src/DigitalClock.ts'],
   output: {
-    file: './dist/digital-clock.js',
+    file: './dist/digital-clock-mm2large.js',
     format: 'es',
     sourcemap: true,
   },

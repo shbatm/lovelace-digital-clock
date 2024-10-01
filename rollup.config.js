@@ -36,7 +36,7 @@ export default [
     input: 'src/DigitalClock.ts',
     output: {
       format: 'es',
-      file: 'dist/digital-clock.js',
+      file: 'dist/digital-clock-mm2large.js',
     },
     plugins: [...plugins],
   },

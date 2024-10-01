@@ -1,5 +1,5 @@
 {
-  "name": "lovelace-digital-clock",
+  "name": "lovelace-digital-clock-mm2large",
   "version": "1.2.4",
   "description": "Home Assistant Digital Clock",
   "keywords": [
@@ -10,8 +10,8 @@
     "lovelace",
     "custom-cards"
   ],
-  "module": "dist/DigitalClock.js",
-  "repository": "git@github.com:wassy92x/lovelace-digital-clock.git",
+  "module": "dist/DigitalClock-mm2large.js",
+  "repository": "git@github.com:shbatm/lovelace-digital-clock.git",
   "author": "Fabian Wassenhoven <info@it-creators.de>",
   "license": "MIT",
   "dependencies": {
