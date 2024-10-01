@@ -146,7 +146,7 @@ export class DigitalClockMM2Large extends LitElement {
     protected render(): TemplateResult | void {
         return html`
             <ha-card>
-                <span class="first-line">${this._firstLine}<sup>${this._seconds}</sup> <span class="meridiem">${this._meridiem}</span></span>
+                <span class="first-line">${this._firstLine}<span class="column"><sup>${this._seconds}</sup><sub class="meridiem">${this._meridiem}</sub></span></span>
                 <span class="second-line">${this._secondLine}</span>
             </ha-card>
         `;
@@ -154,49 +154,48 @@ export class DigitalClockMM2Large extends LitElement {
 
     static get styles(): CSSResult {
         return css`
-          ha-card {
-            text-align: center;
-            font-weight: 400;
-            padding: 8px 0;
-            font-size: 2em;
-            line-height: 1.5em;
-          }
+            ha-card {
+                    text-align: center;
+                    font-weight: 400;
+                    padding: 8px 0;
+                    font-size: 2em;
+                    line-height: 1.5em;
+                }
 
-          sup {
-            font-size: 50%;
-            line-height: 50%;
-            color: var(--disabled-text-color);
-          }
+                sup {
+                    color: var(--disabled-text-color);
+                }
 
-          ha-card > span {
-            display: block;
-            text-align: center;
-          }
+                ha-card>span {
+                    display: block;
+                    text-align: center;
+                }
 
-          .first-line {
-            font-size: 5.5em;
-            line-height: .7em;
-            position: relative;
-            top: 0em;
-            text-align: center;
-            left: 50%;
-            transform: translateX(calc(-50% + .3em));
-            display: table;
-            margin: 0 auto;
-          }
+                span.column {
+                    display: inline-flex;
+                    flex-direction: column;
+                    justify-content: left;
+                    text-align: left;
+                    vertical-align: top;
+                    padding-top: 0.1em;
+                }
 
-          .second-line {
-            font-size: 1em;
-            line-height: 1em;
-            color: var(--disabled-text-color);
-          }
+                sup,
+                sub {
+                    line-height: 0.7em;
+                    font-size: 50% !important;
+                }
 
-          .meridiem {
-            font-size: 50% !important;
-            position: relative;
-            top: 0em;
-            left: -1.1em;
-          }
+                .first-line {
+                    font-size: 5.5em;
+                    line-height: 0.9em;
+                }
+
+                .second-line {
+                    font-size: 1em;
+                    line-height: 1em;
+                    color: var(--disabled-text-color);
+                }
         `;
     }
 }
