@@ -155,47 +155,47 @@ export class DigitalClockMM2Large extends LitElement {
     static get styles(): CSSResult {
         return css`
             ha-card {
-                    text-align: center;
-                    font-weight: 400;
-                    padding: 8px 0;
-                    font-size: 2em;
-                    line-height: 1.5em;
-                }
+                text-align: center;
+                font-weight: 400;
+                padding: 8px 0;
+                font-size: 2em;
+                line-height: 1.5em;
+            }
 
-                sup {
-                    color: var(--disabled-text-color);
-                }
+            sup {
+                color: var(--disabled-text-color);
+            }
 
-                ha-card>span {
-                    display: block;
-                    text-align: center;
-                }
+            ha-card>span {
+                display: block;
+                text-align: center;
+            }
 
-                span.column {
-                    display: inline-flex;
-                    flex-direction: column;
-                    justify-content: left;
-                    text-align: left;
-                    vertical-align: top;
-                    padding-top: 0.1em;
-                }
+            span.column {
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: left;
+                text-align: left;
+                vertical-align: top;
+                padding-top: 0.1em;
+            }
 
-                sup,
-                sub {
-                    line-height: 0.7em;
-                    font-size: 50% !important;
-                }
+            sup,
+            sub {
+                line-height: 0.7em;
+                font-size: 50% !important;
+            }
 
-                .first-line {
-                    font-size: 5.5em;
-                    line-height: 0.9em;
-                }
+            .first-line {
+                font-size: 5.5em;
+                line-height: 0.9em;
+            }
 
-                .second-line {
-                    font-size: 1em;
-                    line-height: 1em;
-                    color: var(--disabled-text-color);
-                }
+            .second-line {
+                font-size: 1em;
+                line-height: 1em;
+                color: var(--disabled-text-color);
+            }
         `;
     }
 }
