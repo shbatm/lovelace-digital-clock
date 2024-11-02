@@ -20,7 +20,7 @@ import IDigitalClockConfig from './IDigitalClockConfig';
 
 /* eslint no-console: 0 */
 console.info(
-    `%c  Digital-Clock \n%c  Version ${CARD_VERSION}    `,
+    `%c  MagicMirror2 Digital-Clock \n%c  Version ${CARD_VERSION}    `,
     'color: orange; font-weight: bold; background: black',
     'color: white; font-weight: bold; background: dimgray',
 );
@@ -130,9 +130,9 @@ export class DigitalClockMM2Large extends LitElement {
 
         if (firstLine !== this._firstLine)
             this._firstLine = firstLine;
-        if (meridiem !== this._meridiem)
+        if ((this._config?.show_meridiem ?? true) && meridiem !== this._meridiem)
             this._meridiem = meridiem;
-        if (seconds !== this._seconds)
+        if ((this._config?.show_seconds ?? true) && seconds !== this._seconds)
             this._seconds = seconds;
         if (secondLine !== this._secondLine)
             this._secondLine = secondLine;
@@ -144,9 +144,11 @@ export class DigitalClockMM2Large extends LitElement {
     }
 
     protected render(): TemplateResult | void {
+        const supSeconds = (this._config?.show_seconds) ? `<sup>${this._seconds}</sup>` : "";
+        const subMeridiem = (this._config?.show_meridiem) ? `<sub class="meridiem">${this._meridiem}</sub>` : "";
         return html`
             <ha-card>
-                <span class="first-line">${this._firstLine}<span class="column"><sup>${this._seconds}</sup><sub class="meridiem">${this._meridiem}</sub></span></span>
+                <span class="first-line">${this._firstLine}<span class="column">${supSeconds}${subMeridiem}</span></span>
                 <span class="second-line">${this._secondLine}</span>
             </ha-card>
         `;

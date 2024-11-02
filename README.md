@@ -6,7 +6,7 @@ A custom digital clock card for Home Assistant
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
 [![License][license-shield]](LICENSE.md)
 
-![Image of Digital Clock Card](https://github.com/wassy92x/lovelace-digital-clock/blob/master/.images/digital-clock.png?raw=true)
+![Image of Digital Clock Card](https://github.com/shbatm/lovelace-digital-clock/blob/mm2_style/.images/MM2-Style.png?raw=true)
 
 ## Options
 
@@ -17,6 +17,8 @@ A custom digital clock card for Home Assistant
 | timeZone          | string  | **Optional** | Time zone to use. For example `Europe/Berlin` | time zone set in your home assistant profile otherwise your browser time zone |
 | firstLineFormat &#124; timeFormat   | object &#124; string | **Optional** | Format of first line           | { hour: '2-digit', minute: '2-digit' } |
 | secondLineFormat &#124; dateFormat | object  &#124; string  | **Optional** | Format of second line        | { weekday: 'short', day: '2-digit', month: 'short' } |
+| show_seconds | boolean | **Optional** | Show a superscript seconds display | true |
+| show_seconds | boolean | **Optional** | Show a subscript meridiem (am/pm) display | true |
 
 If `firstLineFormat` respectively `secondLineFormat` is a string, it can be every format, which is valid in Luxon.
 See: [https://moment.github.io/luxon/#/formatting?id=toformat](https://moment.github.io/luxon/#/formatting?id=toformat)

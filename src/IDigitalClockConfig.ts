@@ -1,5 +1,5 @@
-import {DateTimeFormatOptions} from 'luxon';
-import {LocaleOptions} from 'luxon/src/datetime';
+import { DateTimeFormatOptions } from 'luxon';
+import { LocaleOptions } from 'luxon/src/datetime';
 
 export default interface IDigitalClockConfig {
     interval?: number;
@@ -9,4 +9,6 @@ export default interface IDigitalClockConfig {
     locale?: string;
     firstLineFormat?: (LocaleOptions & DateTimeFormatOptions) | string;
     secondLineFormat?: (LocaleOptions & DateTimeFormatOptions) | string;
+    show_seconds?: boolean;
+    show_meridiem?: boolean;
 }
