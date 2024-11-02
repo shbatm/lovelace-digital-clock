@@ -38,7 +38,9 @@ export class DigitalClockMM2Large extends LitElement {
     @property({ attribute: false }) public hass!: HomeAssistant;
     @state() private _firstLine = '';
     @state() private _meridiem = '';
+    @state() private _showMeridiem = true;
     @state() private _seconds = '';
+    @state() private _showSeconds = true;
     @state() private _secondLine = '';
     @state() private _config?: IDigitalClockConfig;
     @state() private _interval = 1000;
@@ -52,6 +54,10 @@ export class DigitalClockMM2Large extends LitElement {
             this._config.secondLineFormat = this._config.dateFormat;
         if (this._config.interval !== this._interval)
             this._interval = this._config.interval ?? 1000;
+        if (this._config?.show_seconds !== this._showSeconds)
+            this._showSeconds = this._config?.show_seconds ?? true;
+        if (this._config?.show_meridiem !== this._showMeridiem)
+            this._showMeridiem = this._config?.show_meridiem ?? true;
     }
 
     protected shouldUpdate(changedProps: PropertyValues): boolean {
@@ -130,9 +136,9 @@ export class DigitalClockMM2Large extends LitElement {
 
         if (firstLine !== this._firstLine)
             this._firstLine = firstLine;
-        if ((this._config?.show_meridiem ?? true) && meridiem !== this._meridiem)
+        if ((this._showMeridiem) && meridiem !== this._meridiem)
             this._meridiem = meridiem;
-        if ((this._config?.show_seconds ?? true) && seconds !== this._seconds)
+        if ((this._showSeconds) && seconds !== this._seconds)
             this._seconds = seconds;
         if (secondLine !== this._secondLine)
             this._secondLine = secondLine;
@@ -144,8 +150,8 @@ export class DigitalClockMM2Large extends LitElement {
     }
 
     protected render(): TemplateResult | void {
-        const supSeconds = (this._config?.show_seconds) ? `<sup>${this._seconds}</sup>` : "";
-        const subMeridiem = (this._config?.show_meridiem) ? `<sub class="meridiem">${this._meridiem}</sub>` : "";
+        const supSeconds = (this._showSeconds) ? html`<sup>${this._seconds}</sup>` : (this._showMeridiem) ? html`<sup>&nbsp;</sup>` : "";
+        const subMeridiem = (this._showMeridiem) ? html`<sub class="meridiem">${this._meridiem}</sub>` : " ";
         return html`
             <ha-card>
                 <span class="first-line">${this._firstLine}<span class="column">${supSeconds}${subMeridiem}</span></span>
