@@ -152,8 +152,9 @@ export class DigitalClockMM2Large extends LitElement {
     protected render(): TemplateResult | void {
         const supSeconds = (this._showSeconds) ? html`<sup>${this._seconds}</sup>` : (this._showMeridiem) ? html`<sup>&nbsp;</sup>` : "";
         const subMeridiem = (this._showMeridiem) ? html`<sub class="meridiem">${this._meridiem}</sub>` : " ";
+        const fontSizeStyle = (this._config?.fontSize) ? `font-size: ${this._config.fontSize};` : " ";
         return html`
-            <ha-card>
+            <ha-card style="${fontSizeStyle}">
                 <span class="first-line">${this._firstLine}<span class="column">${supSeconds}${subMeridiem}</span></span>
                 <span class="second-line">${this._secondLine}</span>
             </ha-card>

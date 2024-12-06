@@ -8,6 +8,7 @@ export default interface IDigitalClockConfig {
     timeZone?: string;
     locale?: string;
     firstLineFormat?: (LocaleOptions & DateTimeFormatOptions) | string;
+    fontSize?: string;
     secondLineFormat?: (LocaleOptions & DateTimeFormatOptions) | string;
     show_seconds?: boolean;
     show_meridiem?: boolean;
